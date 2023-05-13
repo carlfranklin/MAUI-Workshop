@@ -82,6 +82,11 @@
         Route="AnimationPage" />
 
     <ShellContent
+        Title="MVVM"
+        ContentTemplate="{DataTemplate local:MVVMPage}"
+        Route="MVVMPage" />
+    
+    <ShellContent
         Title="Odds and Ends"
         ContentTemplate="{DataTemplate local:OddsAndEndsPage}"
         Route="OddsAndEndsPage" />

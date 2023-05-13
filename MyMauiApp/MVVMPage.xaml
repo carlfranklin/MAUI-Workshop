@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            x:Class="MyMauiApp.MVVMPage">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="10">
+            <Grid>
+                <Label Text="Publish Date:" />
+                <Label HorizontalOptions="End" Text="{Binding PublishDate, 
+                    StringFormat='{}{0:MMM dd, yyyy}'}"  />
+            </Grid>
+            <Grid>
+                <Label Text="Author:" />
+                <Label HorizontalOptions="End" Text="{Binding Author}"  />
+            </Grid>
+            <Grid>
+                <Label Text="Title:" />
+                <Label HorizontalOptions="End" Text="{Binding Title}"  />
+            </Grid>
+            <Grid>
+                <Label Text="Description:" />
+                <Label HorizontalOptions="End" Text="{Binding Description}"  />
+            </Grid>
+            <Grid>
+                <Label Text="Content:" />
+                <Label HorizontalOptions="End" Text="{Binding Content}" />
+            </Grid>
+            <Label Text="{Binding Message}" />
+            <Button Text="Save" Command="{Binding SaveCommand}" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

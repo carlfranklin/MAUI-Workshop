@@ -3,6 +3,9 @@ global using System.ServiceModel.Syndication;
 global using System.Xml;
 global using MyMauiApp.Models;
 global using MyMauiApp.Services;
+global using MyMauiApp.ViewModels;
+global using CommunityToolkit.Mvvm.ComponentModel;
+global using CommunityToolkit.Mvvm.Input;
 
 using Microsoft.Extensions.Logging;
 

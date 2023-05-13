@@ -60,6 +60,10 @@ Publishing to an app store is beyond the scope of this workshop. If you're inter
    4. Translating
    5. Composite Animations
    6. Easing
-10. **Odds and Ends**
+10. **MVVM**
+    1. INotifyPropertyChanged
+    2. MVVM Community Toolkit
+
+11. **Odds and Ends**
     1. Pop-ups
 
