@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyMauiApp.AnimationPage">
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="5" >
+
+            <Label Margin="5"
+                Text=""
+                FontSize="18"
+                FontAttributes="Bold"
+                x:Name="AnimationLabel"
+                HorizontalOptions="Center" />
+
+            <FlexLayout Margin="5" Wrap="Wrap" >
+                
+                <Button Margin="5"
+                    Text="Fade"
+                    FontAttributes="Bold"
+                    SemanticProperties.Hint="Play Fade Animation"
+                    Clicked="OnFadeAnimationClicked"
+                    HorizontalOptions="Center" />
+
+                <Button Margin="5"
+                    Text="Rotate"
+                    FontAttributes="Bold"
+                    SemanticProperties.Hint="Play Rotate Animation"
+                    Clicked="OnRotateAnimationClicked"
+                    HorizontalOptions="Center" />
+
+                <Button Margin="5"
+                    Text="Scale"
+                    FontAttributes="Bold"
+                    SemanticProperties.Hint="Play Scale Animation"
+                    Clicked="OnScaleAnimationClicked"
+                    HorizontalOptions="Center" />
+
+                <Button Margin="5"
+                    Text="Translate"
+                    FontAttributes="Bold"
+                    SemanticProperties.Hint="Play Translate Animation"
+                    Clicked="OnTranslateAnimationClicked"
+                    HorizontalOptions="Center" />
+
+                <Button Margin="5"
+                    Text="Composite"
+                    FontAttributes="Bold"
+                    SemanticProperties.Hint="Play Composite Animation"
+                    Clicked="OnCompositeAnimationClicked"
+                    HorizontalOptions="Center" />
+                
+                <Button Margin="5"
+                    Text="Easing Bounce Out"
+                    FontAttributes="Bold"
+                    SemanticProperties.Hint="Play Easing Bounce Out Animation"
+                    Clicked="OnEasingBounceOutAnimationClicked"
+                    HorizontalOptions="Center" />
+                
+                <Button Margin="5"
+                    Text="Cancel Animation"
+                    FontAttributes="Bold"
+                    SemanticProperties.Hint="Cancel the dot net bot animation"
+                    Clicked="OnCancelAnimationClicked"
+                    HorizontalOptions="Center" />
+
+            </FlexLayout>
+
+            <Image
+                x:Name="dotNetBotImage"
+                Source="dotnet_bot.png"
+                SemanticProperties.Description="Cute dot net bot waving hi to you!"
+                WidthRequest="250"
+                HeightRequest="500"
+                HorizontalOptions="Center" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

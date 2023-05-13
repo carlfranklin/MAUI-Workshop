@@ -1,0 +1,38 @@
+﻿@page "/"
+
+<table>
+
+    @foreach (var post in BlogDataManager.BlogPosts)
+    {
+        <tr>
+            <td style="width:100px;">
+                <img style="width:100px;height:100px;" src="https://blazorroadshow.azurewebsites.net/blazortrainfiles/blogicon.png" />
+            </td>
+            <td>
+                <div style="background-color:lightgray;padding:20px;">
+                    @post.PublishDate.ToShortDateString()
+                    <span style="font-weight:bold;">&nbsp;@post.Author</span>
+                    <br/>
+                    <span style="font-size:larger;">
+                        @post.Title
+                    </span>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <div style="padding:20px;">
+                    @((MarkupString)post.Description)
+                </div>
+            </td>
+        </tr>
+    }
+</table>
+
+@code
+{
+    protected override void OnInitialized()
+    {
+        BlogDataManager.GetBlogPosts();
+    }
+}

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyMauiApp.BlogPage"
+             xmlns:local="clr-namespace:MyMauiApp"
+             Title="Blog Posts">
+
+    <ScrollView>
+        <CollectionView Margin="20" 
+                        ItemsSource="{Binding BlogPosts}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Image Grid.Row="0" 
+                               Grid.Column="0" 
+                               HeightRequest="100"
+                               WidthRequest="100">
+                            <Image.Source>
+                                <UriImageSource
+                                    Uri="https://blazorroadshow.azurewebsites.net/blazortrainfiles/blogicon.png"
+                                    CacheValidity="10:00:00:00" />
+                            </Image.Source>
+                        </Image>
+                        <Border Grid.Row="0" 
+                                Grid.Column="1"
+                                WidthRequest="{Binding Source={RelativeSource AncestorType={x:Type local:BlogPage}}, Path=Column2Width}"
+                                HorizontalOptions="StartAndExpand"
+                                BackgroundColor="LightGray">
+
+                            <VerticalStackLayout 
+                                WidthRequest="{Binding Source={RelativeSource AncestorType={x:Type local:BlogPage}}, Path=Column2Width}"
+                                Margin="20"
+                                HorizontalOptions="StartAndExpand"
+                                VerticalOptions="CenterAndExpand" >
+                                <HorizontalStackLayout WidthRequest="{Binding Source={RelativeSource AncestorType={x:Type local:BlogPage}}, Path=Column2Width}">
+                                    <Label TextColor="Black"
+                                            Text="{Binding PublishDate, 
+                                            StringFormat='{}{0:MMM dd, yyyy}'}" 
+                                            FontSize="18"  />
+                                    <Label Margin="10,0,0,0"
+                                            Text="{Binding Author}" 
+                                            TextColor="Black"
+                                            FontSize="18" 
+                                            FontAttributes="Bold" />
+                                </HorizontalStackLayout>
+                                <Label Text="{Binding Title}"
+                                       WidthRequest="{Binding Source={RelativeSource AncestorType={x:Type local:BlogPage}}, Path=Column2Width}"
+                                       TextColor="Black"
+                                       LineBreakMode="WordWrap"
+                                       FontSize="22" />
+                            </VerticalStackLayout>
+
+                        </Border>
+                        <Label Grid.Row="2"
+                               Grid.Column="0"
+                               Grid.ColumnSpan="2"
+                               WidthRequest="{Binding Source={RelativeSource AncestorType={x:Type local:BlogPage}}, Path=ContentWidth}"
+                               Margin="20" 
+                               Text="{Binding Description}" 
+                               LineBreakMode="WordWrap"
+                               TextType="Html" 
+                               FontSize="22" />
+                    </Grid>
+
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </ScrollView>
+
+</ContentPage>

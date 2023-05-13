@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="MyMauiApp.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:MyMauiApp"
+    Shell.FlyoutBehavior="Flyout">
+
+    <ShellContent
+        Title="Home"
+        ContentTemplate="{DataTemplate local:MainPage}"
+        Route="MainPage" />
+
+    <ShellContent
+        Title="Details"
+        ContentTemplate="{DataTemplate local:DetailPage}"
+        Route="DetailPage" />
+
+    <ShellContent
+        Title="Simple Binding"
+        ContentTemplate="{DataTemplate local:SimpleBinding}"
+        Route="SimpleBinding" />
+
+    <ShellContent
+        Title="Complex Binding"
+        ContentTemplate="{DataTemplate local:ComplexBinding}"
+        Route="ComplexBinding" />
+
+    <ShellContent
+        Title="Blog Posts"
+        ContentTemplate="{DataTemplate local:BlogPage}"
+        Route="BlogPage" />
+
+    <ShellContent
+        Title="Accelerometer"
+        ContentTemplate="{DataTemplate local:AccelerometerPage}"
+        Route="AccelerometerPage" />
+    
+    <ShellContent
+        Title="Compass"
+        ContentTemplate="{DataTemplate local:CompassPage}"
+        Route="CompassPage" />
+
+    <ShellContent
+        Title="Shake"
+        ContentTemplate="{DataTemplate local:ShakePage}"
+        Route="ShakePage" />
+
+    <ShellContent
+        Title="Gyroscope"
+        ContentTemplate="{DataTemplate local:GyroPage}"
+        Route="GyroPage" />
+
+    <ShellContent
+        Title="Orientation"
+        ContentTemplate="{DataTemplate local:OrientationPage}"
+        Route="OrientationPage" />
+
+    <ShellContent
+        Title="Video"
+        ContentTemplate="{DataTemplate local:VideoPage}"
+        Route="VideoPage" />
+
+    <ShellContent
+        Title="Pan Gestures"
+        ContentTemplate="{DataTemplate local:PanPage}"
+        Route="PanPage" />
+
+    <ShellContent
+        Title="Pinch Gestures"
+        ContentTemplate="{DataTemplate local:PinchPage}"
+        Route="PinchPage" />
+    
+    <ShellContent
+        Title="Swipe Gestures"
+        ContentTemplate="{DataTemplate local:SwipePage}"
+        Route="SwipePage" />
+
+    <ShellContent
+        Title="Animation"
+        ContentTemplate="{DataTemplate local:AnimationPage}"
+        Route="AnimationPage" />
+</Shell>
