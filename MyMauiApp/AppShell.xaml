@@ -80,4 +80,10 @@
         Title="Animation"
         ContentTemplate="{DataTemplate local:AnimationPage}"
         Route="AnimationPage" />
+
+    <ShellContent
+        Title="Odds and Ends"
+        ContentTemplate="{DataTemplate local:OddsAndEndsPage}"
+        Route="OddsAndEndsPage" />
+    
 </Shell>

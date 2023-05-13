@@ -94,6 +94,9 @@
 	  <MauiXaml Update="GyroPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="OddsAndEndsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="PanPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

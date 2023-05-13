@@ -55,4 +55,7 @@ Publishing to an app store is beyond the scope of this workshop. If you're inter
    1. Basic Animation
    2. Easing
    3. Custom Animation
+10. **Odds and Ends**
+    1. Pop-ups
+
 

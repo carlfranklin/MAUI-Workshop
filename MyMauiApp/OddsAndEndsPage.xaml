@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            x:Class="MyMauiApp.OddsAndEndsPage">
+    <ScrollView>
+        <VerticalStackLayout
+            Spacing="25"
+            Padding="30,0"
+            VerticalOptions="Center">
+
+            <Button
+                Text="Display Alert"
+                SemanticProperties.Hint="Displays a pop-up alert"
+                Clicked="Alert"
+                HorizontalOptions="Center" />
+
+            <Button
+                Text="Prompt"
+                SemanticProperties.Hint="Prompt the user for a decision"
+                Clicked="Prompt"
+                HorizontalOptions="Center" />
+
+            <Button
+                Text="Action Sheet"
+                SemanticProperties.Hint="Allow the user to select from options"
+                Clicked="ActionSheet"
+                HorizontalOptions="Center" />
+
+            <Button
+                Text="Action Sheet with Delete"
+                SemanticProperties.Hint="Allow the user to select from options, 
+                    adding a destroy button"
+                Clicked="ActionSheetWithDelete"
+                HorizontalOptions="Center" />
+
+            <Button
+                Text="Prompt for Input"
+                SemanticProperties.Hint="Allow the user to enter a string"
+                Clicked="PromptForInput"
+                HorizontalOptions="Center" />
+            
+            <Button
+                Text="Solve Math Problem"
+                SemanticProperties.Hint="Allow the user to solve a math problem"
+                Clicked="SolveMathProblem"
+                HorizontalOptions="Center" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
