@@ -190,7 +190,7 @@ await dotNetBotImage.RotateTo(360, 500);
 
 ![image-20230512194021699](images/image-20230512194021699.png)
 
-## Scale
+## Scaling
 
 Add the following to *AnimationPage.xaml* at line 31:
 

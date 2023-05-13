@@ -52,10 +52,12 @@ Publishing to an app store is beyond the scope of this workshop. If you're inter
    2. Pinch
    3. Swipe
 9. **Animation**
-   1. Basic Animation
-   2. Easing
-   3. Custom Animation
+   1. Fading
+   2. Rotation
+   3. Scaling
+   4. Translating
+   5. Composite Animations
+   6. Easing
 10. **Odds and Ends**
     1. Pop-ups
-
 
