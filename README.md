@@ -34,6 +34,8 @@ Publishing to an app store is beyond the scope of this workshop. If you're inter
    2. Simple Binding
    3. Advanced Binding
    4. Binding to a List
+   5. XAML Issues
+   6. Value Converters
 6. **Hardware Sensors**
    1. Connectivity
    3. Accelerometer
