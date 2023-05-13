@@ -5,11 +5,16 @@
              xmlns:local="clr-namespace:MyMauiApp"
              Title="Blog Posts">
 
+    <ContentPage.Resources>
+        <local:DateToColorValueConverter x:Key="dateToColor" />
+    </ContentPage.Resources>
+    
     <ScrollView>
-        <CollectionView Margin="20" 
+        <CollectionView x:Name="collectionView"
+                        Margin="20" 
                         ItemsSource="{Binding BlogPosts}">
             <CollectionView.ItemTemplate>
-                <DataTemplate>
+                <DataTemplate x:Name="dataTemplate">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
@@ -31,16 +36,21 @@
                         </Image>
                         <Border Grid.Row="0" 
                                 Grid.Column="1"
-                                WidthRequest="{Binding Source={RelativeSource AncestorType={x:Type local:BlogPage}}, Path=Column2Width}"
-                                HorizontalOptions="StartAndExpand"
-                                BackgroundColor="LightGray">
+                                BackgroundColor="{Binding Converter={StaticResource dateToColor}, 
+                                    Path=PublishDate}"
+                                WidthRequest="{Binding Source={RelativeSource 
+                                    AncestorType={x:Type local:BlogPage}}, Path=Column2Width}"
+                                    HorizontalOptions="StartAndExpand">
 
                             <VerticalStackLayout 
-                                WidthRequest="{Binding Source={RelativeSource AncestorType={x:Type local:BlogPage}}, Path=Column2Width}"
+                                WidthRequest="{Binding Source={RelativeSource 
+                                    AncestorType={x:Type local:BlogPage}}, Path=Column2Width}"
                                 Margin="20"
                                 HorizontalOptions="StartAndExpand"
                                 VerticalOptions="CenterAndExpand" >
-                                <HorizontalStackLayout WidthRequest="{Binding Source={RelativeSource AncestorType={x:Type local:BlogPage}}, Path=Column2Width}">
+                                <HorizontalStackLayout 
+                                    WidthRequest="{Binding Source={RelativeSource 
+                                    AncestorType={x:Type local:BlogPage}}, Path=Column2Width}">
                                     <Label TextColor="Black"
                                             Text="{Binding PublishDate, 
                                             StringFormat='{}{0:MMM dd, yyyy}'}" 
@@ -52,7 +62,10 @@
                                             FontAttributes="Bold" />
                                 </HorizontalStackLayout>
                                 <Label Text="{Binding Title}"
-                                       WidthRequest="{Binding Source={RelativeSource AncestorType={x:Type local:BlogPage}}, Path=Column2Width}"
+                                       WidthRequest="{Binding 
+                                            Source={RelativeSource 
+                                            AncestorType={x:Type local:BlogPage}}, 
+                                            Path=Column2Width}"
                                        TextColor="Black"
                                        LineBreakMode="WordWrap"
                                        FontSize="22" />
@@ -62,7 +75,8 @@
                         <Label Grid.Row="2"
                                Grid.Column="0"
                                Grid.ColumnSpan="2"
-                               WidthRequest="{Binding Source={RelativeSource AncestorType={x:Type local:BlogPage}}, Path=ContentWidth}"
+                               WidthRequest="{Binding Source={RelativeSource 
+                                    AncestorType={x:Type local:BlogPage}}, Path=ContentWidth}"
                                Margin="20" 
                                Text="{Binding Description}" 
                                LineBreakMode="WordWrap"

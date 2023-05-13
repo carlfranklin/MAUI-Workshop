@@ -529,5 +529,208 @@ This is it working on my iPhone using Hot Restart:
 
 Uh oh. It doesn't wrap on iOS. I consider this a bug that will be fixed in the future.
 
+## Binding value converters
 
+A value converter is a class that implements the [IValueConverter](https://learn.microsoft.com/en-us/dotnet/api/microsoft.maui.controls.ivalueconverter) interface. Classes that implement [IValueConverter](https://learn.microsoft.com/en-us/dotnet/api/microsoft.maui.controls.ivalueconverter) are also often referred to as *binding converters* or *binding value converters*.
 
+The purpose of a value converter is to return an object of any type given another object of any type. Typically, this is used in place of logic such as "if the value of a boolean is true, return the color green, otherwise return the color red."
+
+We're going to create a value converter that returns a color based on the month of a date. We'll then implement that in our **BlogPage** page.
+
+Add the following class to the project:
+
+*DateToColorValueConverter.cs*:
+
+```c#
+using System.Globalization;
+
+namespace MyMauiApp;
+
+public class DateToColorValueConverter : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        var date = (DateTime)value;
+        Color color = null;
+
+        switch (date.Month)
+        {
+            case 0:
+                color = Colors.Snow;
+                break;
+            case 1:
+                color = Colors.AliceBlue;
+                break;
+            case 2:
+                color = Colors.LightYellow;
+                break;
+            case 3:
+                color = Colors.GreenYellow;
+                break;
+            case 4:
+                color = Colors.YellowGreen;
+                break;
+            case 5:
+                color = Colors.Green;
+                break;
+            case 6:
+                color = Colors.IndianRed;
+                break;
+            case 7:
+                color = Colors.Red;
+                break;
+            case 8:
+                color = Colors.Orange;
+                break;
+            case 9:
+                color = Colors.DarkOrange;
+                break;
+            case 10:
+                color = Colors.SandyBrown;
+                break;
+            case 11:
+                color = Colors.Tan;
+                break;
+        }
+        return color;
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
+```
+
+This converter returns a `Microsoft.Maui.Graphics.Color`, which is the data type of `Visual Element.BackgroundColor`, given a date where the month is examined.
+
+Replace *BlogPage.xaml* with the following:
+
+```xaml
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyMauiApp.BlogPage"
+             xmlns:local="clr-namespace:MyMauiApp"
+             Title="Blog Posts">
+
+    <ContentPage.Resources>
+        <local:DateToColorValueConverter x:Key="dateToColor" />
+    </ContentPage.Resources>
+    
+    <ScrollView>
+        <CollectionView x:Name="collectionView"
+                        Margin="20" 
+                        ItemsSource="{Binding BlogPosts}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:Name="dataTemplate">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Image Grid.Row="0" 
+                               Grid.Column="0" 
+                               HeightRequest="100"
+                               WidthRequest="100">
+                            <Image.Source>
+                                <UriImageSource
+                                    Uri="https://blazorroadshow.azurewebsites.net/blazortrainfiles/blogicon.png"
+                                    CacheValidity="10:00:00:00" />
+                            </Image.Source>
+                        </Image>
+                        <Border Grid.Row="0" 
+                                Grid.Column="1"
+                                BackgroundColor="{Binding Converter={StaticResource dateToColor}, 
+                                    Path=PublishDate}"
+                                WidthRequest="{Binding Source={RelativeSource 
+                                    AncestorType={x:Type local:BlogPage}}, Path=Column2Width}"
+                                    HorizontalOptions="StartAndExpand">
+
+                            <VerticalStackLayout 
+                                WidthRequest="{Binding Source={RelativeSource 
+                                    AncestorType={x:Type local:BlogPage}}, Path=Column2Width}"
+                                Margin="20"
+                                HorizontalOptions="StartAndExpand"
+                                VerticalOptions="CenterAndExpand" >
+                                <HorizontalStackLayout 
+                                    WidthRequest="{Binding Source={RelativeSource 
+                                    AncestorType={x:Type local:BlogPage}}, Path=Column2Width}">
+                                    <Label TextColor="Black"
+                                            Text="{Binding PublishDate, 
+                                            StringFormat='{}{0:MMM dd, yyyy}'}" 
+                                            FontSize="18"  />
+                                    <Label Margin="10,0,0,0"
+                                            Text="{Binding Author}" 
+                                            TextColor="Black"
+                                            FontSize="18" 
+                                            FontAttributes="Bold" />
+                                </HorizontalStackLayout>
+                                <Label Text="{Binding Title}"
+                                       WidthRequest="{Binding 
+                                            Source={RelativeSource 
+                                            AncestorType={x:Type local:BlogPage}}, 
+                                            Path=Column2Width}"
+                                       TextColor="Black"
+                                       LineBreakMode="WordWrap"
+                                       FontSize="22" />
+                            </VerticalStackLayout>
+
+                        </Border>
+                        <Label Grid.Row="2"
+                               Grid.Column="0"
+                               Grid.ColumnSpan="2"
+                               WidthRequest="{Binding Source={RelativeSource 
+                                    AncestorType={x:Type local:BlogPage}}, Path=ContentWidth}"
+                               Margin="20" 
+                               Text="{Binding Description}" 
+                               LineBreakMode="WordWrap"
+                               TextType="Html" 
+                               FontSize="22" />
+                    </Grid>
+
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </ScrollView>
+
+</ContentPage>
+```
+
+Check out lines 8-10:
+
+```xaml
+<ContentPage.Resources>
+    <local:DateToColorValueConverter x:Key="dateToColor" />
+</ContentPage.Resources>
+```
+
+Because we have defined the `local` xaml namespace, we can get a reference into our app.
+
+These lines defines a reference to our `DateToColorValueConverter` named `dateToColor`.
+
+Now check out the definition for our `Border` control:
+
+```xaml
+<Border Grid.Row="0" 
+        Grid.Column="1"
+        BackgroundColor="{Binding Converter={StaticResource dateToColor}, 
+            Path=PublishDate}"
+        WidthRequest="{Binding Source={RelativeSource 
+            AncestorType={x:Type local:BlogPage}}, Path=Column2Width}"
+            HorizontalOptions="StartAndExpand">
+```
+
+The order that any bound properties are defined is important. Before, we had set the `WidthRequest` property binding before the `BackgroundColor`. Because the binding for `WidthRequest` changed the binding source to the code-behind file, the source is now changed for each subsequently defined properties.
+
+The easiest solution is to define the `BackgroundColor` first, because it is already bound to the `DataTemplate` where `PublishDate` lives.
+
+This is one of those quirks of XAML that drives me nuts.
+
+Run the app and navigate to the Blog Posts page. Notice that the Border (header) for each post has a different color.
+
+![image-20230513103505384](images/image-20230513103505384.png)
