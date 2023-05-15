@@ -370,13 +370,8 @@ private async void OnEasingBounceOutAnimationClicked(object sender, EventArgs e)
 {
     SemanticScreenReader.Announce(AnimationLabel.Text);
     AnimationLabel.Text = "Easing BounceOut";
-    // This one took a little time to figure out. The last +10
-    // is there because of the Spacing="5" in the StackLayout
-    // plus the margin of 5.
-    // It works with any screen size.
-    var translateToCoordinateY = Height
-        - dotNetBotImage.Height - (dotNetBotImage.Height / 2) + 10;
-    await dotNetBotImage.TranslateTo(0, translateToCoordinateY, 2000, Easing.BounceOut);
+    await dotNetBotImage.TranslateTo(0, -200, 
+        2000, Easing.BounceOut);
     ResetProperties();
 }
 ```

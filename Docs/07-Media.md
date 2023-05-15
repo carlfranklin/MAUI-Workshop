@@ -581,7 +581,7 @@ public partial class BlogPage : ContentPage
 
 ### Load a Remote Image
 
-Change the `Source` property of our `Image` object on line 17 to the following:
+Change the `Source` property of our `Image` object on line 25 to the following:
 
 ```
 https://blazorroadshow.azurewebsites.net/blazortrainfiles/blogicon.png
@@ -791,7 +791,7 @@ The default implementation of the `IClipboard` interface is available through th
 
 > :point_up: Access to the clipboard must be done on the main user interface thread. For more information on how to invoke methods on the main user interface thread, see [MainThread](https://learn.microsoft.com/en-us/dotnet/maui/platform-integration/appmodel/main-thread).
 
-Replace MainPage.xaml.cs* with the following:
+Replace *MainPage.xaml.cs* with the following:
 
 ```c#
 namespace MyMauiApp;

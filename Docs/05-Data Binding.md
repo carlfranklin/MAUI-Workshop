@@ -436,6 +436,17 @@ public partial class BlogPage : ContentPage
 }
 ```
 
+Add to *AppShell.xaml*:
+
+```c#
+    <ShellContent
+        Title="Blog Posts"
+        ContentTemplate="{DataTemplate local:BlogPage}"
+        Route="BlogPage" />
+```
+
+
+
 Here we are defining a read-only `BlogPosts` property that returns the blog posts from the data manager.
 
 ```c#
@@ -619,80 +630,38 @@ Replace *BlogPage.xaml* with the following:
     </ContentPage.Resources>
     
     <ScrollView>
-        <CollectionView x:Name="collectionView"
-                        Margin="20" 
+        <CollectionView Margin="20" 
                         ItemsSource="{Binding BlogPosts}">
             <CollectionView.ItemTemplate>
-                <DataTemplate x:Name="dataTemplate">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="100" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-                        <Image Grid.Row="0" 
-                               Grid.Column="0" 
-                               HeightRequest="100"
-                               WidthRequest="100">
-                            <Image.Source>
-                                <UriImageSource
-                                    Uri="https://blazorroadshow.azurewebsites.net/blazortrainfiles/blogicon.png"
-                                    CacheValidity="10:00:00:00" />
-                            </Image.Source>
-                        </Image>
-                        <Border Grid.Row="0" 
-                                Grid.Column="1"
-                                BackgroundColor="{Binding Converter={StaticResource dateToColor}, 
-                                    Path=PublishDate}"
-                                WidthRequest="{Binding Source={RelativeSource 
-                                    AncestorType={x:Type local:BlogPage}}, Path=Column2Width}"
-                                    HorizontalOptions="StartAndExpand">
-
-                            <VerticalStackLayout 
-                                WidthRequest="{Binding Source={RelativeSource 
-                                    AncestorType={x:Type local:BlogPage}}, Path=Column2Width}"
-                                Margin="20"
-                                HorizontalOptions="StartAndExpand"
-                                VerticalOptions="CenterAndExpand" >
-                                <HorizontalStackLayout 
-                                    WidthRequest="{Binding Source={RelativeSource 
-                                    AncestorType={x:Type local:BlogPage}}, Path=Column2Width}">
-                                    <Label TextColor="Black"
-                                            Text="{Binding PublishDate, 
-                                            StringFormat='{}{0:MMM dd, yyyy}'}" 
-                                            FontSize="18"  />
-                                    <Label Margin="10,0,0,0"
-                                            Text="{Binding Author}" 
-                                            TextColor="Black"
-                                            FontSize="18" 
-                                            FontAttributes="Bold" />
+                <DataTemplate>
+                    <VerticalStackLayout Margin="0,0,0,20">
+                        <Border BackgroundColor=
+                                "{Binding Converter={StaticResource dateToColor}, 
+                                    Path=PublishDate}">
+                            <VerticalStackLayout Margin="20" >
+                                <HorizontalStackLayout>
+                                    <Label Margin="0,0,10,0" 
+                                        TextColor="Black"
+                                        Text="{Binding PublishDate, 
+                                        StringFormat='{}{0:MMM dd, yyyy}'}" 
+                                        FontSize="18"  />
+                                    <Label Text="{Binding Author}" 
+                                        TextColor="Black"
+                                        FontSize="18" 
+                                        FontAttributes="Bold" />
                                 </HorizontalStackLayout>
-                                <Label Text="{Binding Title}"
-                                       WidthRequest="{Binding 
-                                            Source={RelativeSource 
-                                            AncestorType={x:Type local:BlogPage}}, 
-                                            Path=Column2Width}"
+                                <Label Text="{Binding Title}" 
                                        TextColor="Black"
                                        LineBreakMode="WordWrap"
                                        FontSize="22" />
                             </VerticalStackLayout>
-
                         </Border>
-                        <Label Grid.Row="2"
-                               Grid.Column="0"
-                               Grid.ColumnSpan="2"
-                               WidthRequest="{Binding Source={RelativeSource 
-                                    AncestorType={x:Type local:BlogPage}}, Path=ContentWidth}"
-                               Margin="20" 
+                        <Label Margin="20" 
                                Text="{Binding Description}" 
                                LineBreakMode="WordWrap"
                                TextType="Html" 
                                FontSize="22" />
-                    </Grid>
-
+                    </VerticalStackLayout>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
@@ -716,13 +685,9 @@ These lines defines a reference to our `DateToColorValueConverter` named `dateTo
 Now check out the definition for our `Border` control:
 
 ```xaml
-<Border Grid.Row="0" 
-        Grid.Column="1"
-        BackgroundColor="{Binding Converter={StaticResource dateToColor}, 
-            Path=PublishDate}"
-        WidthRequest="{Binding Source={RelativeSource 
-            AncestorType={x:Type local:BlogPage}}, Path=Column2Width}"
-            HorizontalOptions="StartAndExpand">
+    <Border BackgroundColor=
+            "{Binding Converter={StaticResource dateToColor}, 
+                Path=PublishDate}">
 ```
 
 The order that any bound properties are defined is important. Before, we had set the `WidthRequest` property binding before the `BackgroundColor`. Because the binding for `WidthRequest` changed the binding source to the code-behind file, the source is now changed for each subsequently defined properties.
@@ -733,4 +698,4 @@ This is one of those quirks of XAML that drives me nuts.
 
 Run the app and navigate to the Blog Posts page. Notice that the Border (header) for each post has a different color.
 
-![image-20230513103505384](images/image-20230513103505384.png)
+![image-20230515144414432](images/image-20230515144414432.png)

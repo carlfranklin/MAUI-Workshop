@@ -211,6 +211,10 @@ At the top of the Visual Studio window where it says **Windows Machine** you can
 
 <img src="images/image-20230508180529293.png" alt="image-20230508180529293" style="zoom:67%;" />
 
+
+
+> :point_up: You must enable Windows Developer Mode in order to debug on Windows. Follow the links if you get an error.
+
 Run the app by pressing the Play button or the F5 key, and then we'll talk about how to configure a few things for the Windows platform. It should look something like this:
 
 ![image-20230508180623262](images/image-20230508180623262.png)
