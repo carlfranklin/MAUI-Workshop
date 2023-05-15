@@ -460,7 +460,7 @@ Line 35 specifies that the title should wrap:
 LineBreakMode="WordWrap"
 ```
 
-and yet it does not. I consider this a bug.
+and yet it does not. I have spoken to a member of the MAUI team about this, and they confirmed that this is indeed a bug that will be fixed in the future.
 
 It's very obvious when I run it on my Android phone:
 
