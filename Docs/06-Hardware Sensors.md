@@ -876,4 +876,106 @@ Not all location values may be available, depending on the device. For example, 
 
 > :warning: [GetLocationAsync](https://learn.microsoft.com/en-us/dotnet/api/microsoft.maui.devices.sensors.igeolocation.getlocationasync) can return `null` in some scenarios. This indicates that the underlying platform is unable to obtain the current location.
 
+Add a new ContentPage to the project called *GeoLocationPage.xaml*:
+
+```xaml
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            x:Class="MyMauiApp.GeoLocationPage">
+    <ScrollView>
+        <VerticalStackLayout
+            Spacing="25"
+            Padding="30,0"
+            VerticalOptions="Center">
+
+            <Label x:Name="GeoLocationLabel"
+                Text="GeoLocation Data"
+                SemanticProperties.HeadingLevel="Level1"
+                FontSize="32"
+                HorizontalOptions="Center" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
+```
+
+Add a code-behind class:
+
+*GeoLocationPage.xaml.cs*:
+
+```c#
+namespace MyMauiApp;
+
+public partial class GeoLocationPage : ContentPage
+{
+    private CancellationTokenSource _cancelTokenSource;
+    private bool _isCheckingLocation;
+    private Timer GPSTimer;
+
+    public GeoLocationPage()
+    {
+        InitializeComponent();
+        GPSTimer = new Timer(GetCurrentLocation, null, 100, 500);
+    }
+
+    public async void GetCurrentLocation(object stateInfo)
+    {
+        MainThread.BeginInvokeOnMainThread(async () =>
+        {
+            try
+            {
+                _isCheckingLocation = true;
+
+                GeolocationRequest request = new GeolocationRequest(GeolocationAccuracy.Medium, TimeSpan.FromSeconds(10));
+
+                _cancelTokenSource = new CancellationTokenSource();
+
+                Location location = await Geolocation.Default.GetLocationAsync(request, _cancelTokenSource.Token);
+
+                if (location != null)
+                {
+                    GeoLocationLabel.Text = $"Latitude: {location.Latitude}, Longitude: {location.Longitude}, Altitude: {location.Altitude}";
+
+
+                }
+            }
+            // Catch one of the following exceptions:
+            //   FeatureNotSupportedException
+            //   FeatureNotEnabledException
+            //   PermissionException
+            catch (Exception ex)
+            {
+                // Unable to get location
+            }
+            finally
+            {
+                _isCheckingLocation = false;
+            }
+        });
+    }
+
+    public void CancelRequest()
+    {
+        if (_isCheckingLocation && _cancelTokenSource != null && _cancelTokenSource.IsCancellationRequested == false)
+            _cancelTokenSource.Cancel();
+    }
+}
+```
+
+Add to *AppShell.xaml*:
+
+```xaml
+<ShellContent
+    Title="GPS"
+    ContentTemplate="{DataTemplate local:GeoLocationPage}"
+    Route="GeoLocationPage" />
+```
+
+Run the app on a mobile device.
+
+Here it is running in my Android Emulator:
+
+![image-20230516073255240](images/image-20230516073255240.png)
+
 For more information see the [MAUI Geolocation Documentation](https://learn.microsoft.com/en-us/dotnet/maui/platform-integration/device/geolocation?view=net-maui-7.0&tabs=windows)

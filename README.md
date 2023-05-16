@@ -38,11 +38,12 @@ Publishing to an app store is beyond the scope of this workshop. If you're inter
    6. Value Converters
 6. **Hardware Sensors**
    1. Connectivity
-   3. Accelerometer
-   4. Compass
-   6. Shake
-   7. Gyroscope
-   8. Orientation
+   2. Accelerometer
+   3. Compass
+   4. Shake
+   5. Gyroscope
+   6. Orientation
+   7. GeoLocation
 7. **Media**
 
    1. Playing Media

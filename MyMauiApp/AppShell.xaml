@@ -57,6 +57,11 @@
         Route="OrientationPage" />
 
     <ShellContent
+        Title="GPS"
+        ContentTemplate="{DataTemplate local:GeoLocationPage}"
+        Route="GeoLocationPage" />
+    
+    <ShellContent
         Title="Video"
         ContentTemplate="{DataTemplate local:VideoPage}"
         Route="VideoPage" />

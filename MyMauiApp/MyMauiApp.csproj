@@ -92,6 +92,9 @@
 	  <MauiXaml Update="DetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="GeoLocationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="GyroPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
